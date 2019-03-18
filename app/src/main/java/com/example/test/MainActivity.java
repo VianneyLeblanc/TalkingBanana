@@ -29,17 +29,7 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.button).setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                /*ObtenirUrl example = new ObtenirUrl();
-                String response = null;
-                try {
-                    response = example.run("https://rickandmortyapi.com/api/character");
-                    Log.i("tag response", "onClick: "+response);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }*/
-                new ObtenirUrl().execute();
-
-                //startActivity(new Intent(MainActivity.this,Game.class));
+                startActivity(new Intent(MainActivity.this,GameActivity.class));
             }
         });
     }
