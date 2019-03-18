@@ -1,12 +1,10 @@
 package com.example.test;
 
 import android.os.AsyncTask;
-import android.support.v4.content.AsyncTaskLoader;
 import android.util.Log;
 
 import java.io.IOException;
 
-import okhttp3.Call;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -49,6 +47,7 @@ public class ObtenirUrl extends AsyncTask<Void, Void ,Response>
             Log.i("tag", "reponse vide");
         }
         else {
+
 
             // Traitement de la réponse / Parse JSON etc
         }
