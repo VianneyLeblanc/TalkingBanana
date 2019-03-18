@@ -23,7 +23,7 @@ public class Game extends AppCompatActivity {
                     findViewById(R.id.navigation_home).setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            startActivity(new Intent(Game.this, Create.class));
+                            startActivity(new Intent(Game.this, Game.class));
                         }
                     });
                     }

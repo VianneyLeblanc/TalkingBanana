@@ -12,7 +12,6 @@
         <activity
             android:name=".Game"
             android:label="@string/title_activity_game"></activity>
-        <activity android:name=".Create"></activity>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
