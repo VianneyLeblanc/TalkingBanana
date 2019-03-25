@@ -22,7 +22,7 @@ public class CallAPI extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_game);
+        setContentView(R.layout.activity_call_api);
 
         OkHttpClient client = new OkHttpClient();
 

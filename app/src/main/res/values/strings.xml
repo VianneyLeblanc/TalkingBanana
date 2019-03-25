@@ -4,4 +4,6 @@
     <string name="title_home">Create</string>
     <string name="title_dashboard">Play the Game</string>
     <string name="title_notifications">Rank</string>
+    <string name="title_activity_create_navigation">CreateNavigation</string>
+    <string name="title_activity_play_navigation">PlayNavigation</string>
 </resources>
