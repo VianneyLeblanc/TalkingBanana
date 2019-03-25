@@ -1,55 +1,67 @@
 package com.example.test;
 
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.MenuItem;
+import android.widget.TextView;
 
-import android.os.AsyncTask;
-import android.util.Log;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
-import okhttp3.MultipartBody;
+
+import okhttp3.Call;
+import okhttp3.Callback;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
-import okhttp3.RequestBody;
 import okhttp3.Response;
 
-public class CallAPI extends AsyncTask<String, String, Response> {
-    @Override
-    protected void onPreExecute() {
-        super.onPreExecute();
-    }
+public class CallAPI extends AppCompatActivity {
 
     @Override
-    protected Response doInBackground(String... params) {
-        String urlString = params[0]; // URL to call
-        String data = params[1]; //data to post
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_game);
 
         OkHttpClient client = new OkHttpClient();
 
-        RequestBody requestBody = new MultipartBody.Builder().setType(MultipartBody.FORM).addFormDataPart("json", data).build();
+        String url = "http://adynamic-scissors.000webhostapp.com/?page=getapi";
 
-        Request request = new Request.Builder().url(urlString).post(requestBody).build();
+        Request request = new Request.Builder()
+                .url(url)
+                .build();
 
-        Response response = null;
-        try {
-            response = client.newCall(request).execute();
-        } catch (IOException e) {
-            e.printStackTrace();
-            Log.i("ERROR 36", "----------------->" + e.getMessage());
-        }
-
-        return response;
-    }
-
-    @Override
-    protected void onPostExecute(Response response) {
-        if (response == null) {
-            Log.i("tag", "----------------------> La requete à rendu null !!");
-        } else {
-            String rep = null;
-            try {
-                rep = response.body().string();
-                Log.i("INFO", rep);
-            } catch (Exception e) {
-                Log.i("ERROR 51", "-------------------->" + e.getMessage());
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                e.printStackTrace();
             }
-        }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                if(response.isSuccessful()) {
+                    final String myResponse = response.body().string();
+
+                    CallAPI.this.runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            try {
+                                FileOutputStream fileOutputStream = openFileOutput("DataTalkingBanana.json", MODE_PRIVATE);
+                                fileOutputStream.write(Integer.parseInt(myResponse));
+                                fileOutputStream.close();
+
+                            }
+                            catch (FileNotFoundException fnfe) {
+                                fnfe.printStackTrace();
+                            }
+                            catch (IOException ioe) {
+                                ioe.printStackTrace();
+                            }
+                        }
+                    });
+                }
+            }
+        });
     }
 }
